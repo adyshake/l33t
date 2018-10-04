@@ -25,8 +25,13 @@
 * What is final keyword in java? How can final objects be modified?
 * Interface questions
 * Collection questions.
+* Concept of inner class
+* How to sort elements in an ArrayList and how to reverse them.
+* Generics
 
 ## DS
+* Reverse DNA computing pair
+* Count ways to reach the nth stair
 * 8 Queens
 * Merging point/Intersection point of two linked lists
 * Find LCA for the human geneology tree
@@ -35,6 +40,7 @@
 * How would you find max and min element at a position in the stack in constant time
 
 ## Puzzles and Math
+* 5 cards magic trick
 * Burn rope                                                               **[DONE]**
 * Gold bar Puzzle                                                         **[DONE]**
 * Calculate salary avg                                                    **[DONE]**
