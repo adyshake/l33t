@@ -1,67 +1,71 @@
 //https://leetcode.com/problems/string-to-integer-atoi/description/
 
 class Solution {
-public:
-    int myAtoi(string str) {
-        int sign = 1;
-        bool began = false;
-        int final_num = 0;
-        int pop = 0;
-        for (int i = 0; i < str.size(); i++)
-        {
-            if (str[i] == ' ')
-            {
-                cout << "space ";
-                if(began)
-                    break;
-                continue;
-            }
-            
-            if (str[i] == '+')
-            {   
-                cout << "plus ";
-                if(began)
-                    break;
-                sign = 1;
-                began = true;
-                continue;
-            }
-
-            if (str[i] == '-')
-            {
-                cout << "minus ";
-                if(began)
-                    break;
-                sign = -1;
-                began = true;
-                continue;
-            }
-
-            if ('0' <= str[i] && str[i] <= '9')
-            {
-                cout << "char ";
-                //if numeric
-                began = true;
-                
-                pop = (str[i] - '0') * sign;
-                cout << pop << " ";
-                if (final_num > INT_MAX/10 || (final_num == INT_MAX/10 && pop > 7))
-                {
-                    return INT_MAX;
-                }
-                if (final_num < INT_MIN/10 || (final_num == INT_MIN/10 && pop < -8))
-                {
-                    return INT_MIN;
-                }
-                
-                final_num = final_num * 10 + pop;
-                cout << final_num << " ";
-            }
-            else
-            {
+    public int myAtoi(String str) {
+        int len = str.length();
+        
+        if (len == 0) {
+            return 0;
+        }
+        
+        int i = 0;
+        
+        while (i < len) {
+            if (str.charAt(i) != ' ') {
                 break;
             }
+            ++i;
         }
-        return final_num;
+        
+        if (i == len)
+            return 0;
+        
+        int sign = 1;
+        
+        if (str.charAt(i) == '-') {
+            sign = -1;
+            ++i;
+        }
+        else if (str.charAt(i) == '+') {
+            sign = 1;
+            ++i;
+        }
+        
+        
+        Stack<Integer> s = new Stack<>();
+        
+        while (i < len) {
+            String cur = Character.toString(str.charAt(i));
+            if (!cur.matches("[0-9]")) {
+                break;
+            }
+            
+            int curInt = Integer.parseInt(cur);
+            //System.out.println("curInt" + curInt);
+            s.push(curInt);
+            
+            ++i;
+        }
+        
+        
+        int pow = 0;
+        long res = 0;
+        while (!s.empty()) {
+            int cur = s.pop();
+            //System.out.println(cur);
+            res += cur * Math.pow(10, pow);
+            ++pow;
+        }
+        
+        res = res * sign;
+        
+        if (res >= Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        else if (res <= Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+        
+        return (int)res;
     }
-};
+}
